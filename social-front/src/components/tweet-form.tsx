@@ -9,8 +9,22 @@ export default function TweetForm() {
     setTweet(e.target.value)
   }
 
-  function handledPost(){
+  async function handledPost(){
     console.log(tweet)
+
+    const res = await fetch('http://localhost:8080/tweet', {
+      method: 'POST',
+      body: JSON.stringify({
+        tweet
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+    const data = await res.json()
+    console.log(data)
+
   }
 
 

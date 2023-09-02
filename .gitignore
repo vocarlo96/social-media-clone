@@ -9,6 +9,10 @@ lerna-debug.log*
 
 social-back/node_modules
 social-front/node_modules
+
+social-back/.env
+social-front/.env
+
 dist
 dist-ssr
 *.local
