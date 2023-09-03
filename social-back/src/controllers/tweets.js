@@ -8,17 +8,22 @@ const getTweets = async (req, res, next) => {
 }
 
 const createTweet = async (req, res, next) => {
+    
     const data = req.body
-    console.log(data)
     const query = {
-        text:'INSERT INTO tweet(tweet) VALUES($1)',
-        values:[data.tweet]
+        text:'INSERT INTO tweet(tweet, user_id) VALUES($1, $2) RETURNING *',
+        values:[data.tweet, data.username]
     } 
 
-    const newTweet = await dbClient.query(query)
+    try{
+        const newTweet = await dbClient.query(query)
+        res.status(201).send(newTweet.rows[0])
+    } catch(e){
+        res.status(400)
+    } finally {
+        res.end()
+    }
     // await dbClient.end()
-    res.send(newTweet.rows)
-    res.end()
 }
 
 export {getTweets, createTweet}

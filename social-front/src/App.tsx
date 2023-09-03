@@ -23,14 +23,36 @@ function App() {
   //     handleCondition(darkMode)
   // }, [darkMode])
 
+  const [tweetList, setTweetList] = useState<tweet[]>([])
+
+    useEffect(() => {
+        const controller = new AbortController()
+
+        const fetchData = async () => {
+            const res = await fetch('http://localhost:8080/tweet', {
+                method: 'get',
+                signal: controller.signal
+            })
+            const data = await res.json()
+            setTweetList(data)
+        }
+        
+        fetchData()
+
+        return () => controller.abort()
+    }, [])
+
+  function tweetInsertionHandler(data: tweet){
+    setTweetList((prev) => [data, ...prev])
+  }
 
   return (
     <main className=''>
       {/* <button onClick={()=>setDarkMode((prev) => !prev)}>dark</button> */}
-      <TweetForm/>
-      <TweetList/>
+      <TweetForm newTweetHandler={tweetInsertionHandler}/>
+      <TweetList tweetList={tweetList}/>
     </main>
   )
-}
+} 
 
 export default App

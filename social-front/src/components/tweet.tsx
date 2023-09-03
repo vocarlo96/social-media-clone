@@ -1,11 +1,11 @@
-import { Profile1, Profile2 } from '../assets';
+import { BlankProfile, Profile2 } from '../assets';
 // import { Chat, Fav, Retweet, Stats } from '../assets/icons';
-function Tweet() {
+function Tweet({tweet}: {tweet: tweet}) {
     return(
         <div className='text-gray-950 py-3 px-5 border-b border-gray-400 cursor-pointer'>
             
             <div className='flex'>
-                <img className="w-14 h-14 rounded-full object-cover mr-4 mt-1" src={Profile1} alt="user profile"/>
+                <img className="w-14 h-14 rounded-full object-cover mr-4 mt-1" src={BlankProfile} alt="user profile"/>
                 <div className=''>
                     <div className='flex max-h-5 mb-1 items-center'>
                         <svg xmlns="http://www.w3.org/2000/svg" className="fill-gray-500 h-5 mr-2" viewBox="0 -960 960 960"><path d="M280-80 120-240l160-160 42 44-86 86h464v-160h60v220H236l86 86-42 44Zm-80-450v-220h524l-86-86 42-44 160 160-160 160-42-44 86-86H260v160h-60Z"/></svg>
@@ -16,7 +16,7 @@ function Tweet() {
                         <p className="">@pedri</p>
                     </div>
                     <div className="mb-4">
-                        <p className="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum odio laborum eaque. Nisi nam illo atque at. Laborum ea, mollitia consequatur totam perspiciatis, consequuntur similique aperiam placeat, facere odio necessitatibus.</p>
+                        <p className="">{tweet.tweet}</p>
                     </div>
 
                     {/* IMAGE IF ANY */}

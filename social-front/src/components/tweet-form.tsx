@@ -1,7 +1,7 @@
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
-import { Profile2 } from "../assets";
+import { ChangeEvent, useState } from "react";
+import { BlankProfile } from "../assets";
 
-export default function TweetForm() {
+export default function TweetForm({newTweetHandler}: {newTweetHandler: (data: tweet) => void}) {
 
   const [tweet, setTweet] = useState("")
 
@@ -10,12 +10,12 @@ export default function TweetForm() {
   }
 
   async function handledPost(){
-    console.log(tweet)
 
     const res = await fetch('http://localhost:8080/tweet', {
       method: 'POST',
       body: JSON.stringify({
-        tweet
+        tweet,
+        username: 'voca',
       }),
       headers: {
         "Content-Type": "application/json",
@@ -23,8 +23,7 @@ export default function TweetForm() {
       },
     })
     const data = await res.json()
-    console.log(data)
-
+    newTweetHandler(data)
   }
 
 
@@ -32,7 +31,7 @@ export default function TweetForm() {
     <div className="mx-auto max-w-[50%] min-h-[12rem] py-3 pt-6 px-5 border-x border-b border-gray-400 overflow-auto">
       <div className="flex h-full">
         <img
-          src={Profile2}
+          src={BlankProfile}
           alt="Profile pic miniature"
           className="w-14 h-14 rounded-full object-cover mr-4"
         />
