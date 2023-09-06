@@ -4,8 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.tsx'
 import './index.css'
 
-import { Feed } from './App.tsx'
 import Profile from './components/profile.tsx'
+import Feed from './components/feed.tsx'
 
 const router = createBrowserRouter([{
   path: '/',
@@ -15,7 +15,23 @@ const router = createBrowserRouter([{
     element: <Feed />
   }, {
     path: '/profile',
-    element: <Profile />
+    element: <Profile />,
+    children: [{
+      path: '/profile/replies',
+      element: <></>
+    },
+    {
+      path: '/profile/highlights',
+      element: <></>
+    },
+    {
+      path: '/profile/media',
+      element: <></>
+    },
+    {
+      path: '/profile/likes',
+      element: <></>
+    }]
   }]
 }])
 

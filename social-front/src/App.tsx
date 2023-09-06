@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react'
-import {Outlet} from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import './App.css'
 
-
-import TweetList from './components/tweet-list'
-import TweetForm from './components/tweet-form'
+import Nav from './components/nav'
 
 // function handleCondition(condition: boolean){
 //   if (condition) {
@@ -26,46 +23,13 @@ function App() {
   //     handleCondition(darkMode)
   // }, [darkMode])
 
-  
-
   return (
-    <main className=''>
+    <main className='flex items-start'>
       {/* <button onClick={()=>setDarkMode((prev) => !prev)}>dark</button> */}
-      <Outlet/>
+      <Nav />
+      <Outlet />
     </main>
-  )
-} 
-
-function Feed(){
-  const [tweetList, setTweetList] = useState<tweet[]>([])
-
-    useEffect(() => {
-        const controller = new AbortController()
-
-        const fetchData = async () => {
-            const res = await fetch('http://localhost:8080/tweet', {
-                method: 'get',
-                signal: controller.signal
-            })
-            const data = await res.json()
-            setTweetList(data)
-        }
-        
-        fetchData()
-
-        return () => controller.abort()
-    }, [])
-
-  function tweetInsertionHandler(data: tweet){
-    setTweetList((prev) => [data, ...prev])
-  }
-  return(
-    <>
-      <TweetForm newTweetHandler={tweetInsertionHandler}/>
-      <TweetList tweetList={tweetList}/>
-    </>
   )
 }
 
-export{Feed}
 export default App

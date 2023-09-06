@@ -1,9 +1,10 @@
+import { NavLink, Outlet } from 'react-router-dom'
 import { Background, BlankProfile } from '../assets'
 import { Calendar, Back } from '../assets/icons'
 
 export default function Profile() {
     return (
-        <section className='mx-auto max-w-[50%] min-h-[12rem]'>
+        <section className='max-w-[50%] w-full min-h-[12rem]'>
             <div className='w-full flex px-4 h-12 items-center'>
                 <img src={Back} alt="" className="mr-8 h-8" />
                 <div className="flex flex-col">
@@ -35,13 +36,66 @@ export default function Profile() {
             </div>
             <nav className='w-full'>
                 <ul className="flex h-8">
-                    <li className="flex-shrink basis-full text-center capitalize border-b-blue-600 border-b-4">post</li>
-                    <li className="flex-shrink basis-full text-center capitalize">replies</li>
-                    <li className="flex-shrink basis-full text-center capitalize">highlights</li>
-                    <li className="flex-shrink basis-full text-center capitalize">media</li>
-                    <li className="flex-shrink basis-full text-center capitalize">likes</li>
+                    <li className="flex-shrink basis-full text-center capitalize">
+                        <NavLink to="/profile" end className={({ isActive, isPending }) =>
+                            isActive
+                                ? "border-b-blue-600 border-b-4"
+                                : isPending
+                                    ? "pending"
+                                    : ""
+                        }>
+                            post
+                        </NavLink>
+                    </li>
+                    <li className="flex-shrink basis-full text-center capitalize">
+                        <NavLink to="/profile/replies" className={({ isActive, isPending }) =>
+                            isActive
+                                ? "border-b-blue-600 border-b-4"
+                                : isPending
+                                    ? "pending"
+                                    : ""
+                        }>
+                            replies
+                        </NavLink>
+                    </li>
+                    <li className="flex-shrink basis-full text-center capitalize">
+                        <NavLink to="/profile/highlights" className={({ isActive, isPending }) =>
+                            isActive
+                                ? "border-b-blue-600 border-b-4"
+                                : isPending
+                                    ? "pending"
+                                    : ""
+                        }>
+                            highlights
+                        </NavLink>
+                    </li>
+                    <li className="flex-shrink basis-full text-center capitalize">
+                        <NavLink to="/profile/media" className={({ isActive, isPending }) =>
+                            isActive
+                                ? "border-b-blue-600 border-b-4"
+                                : isPending
+                                    ? "pending"
+                                    : ""
+                        }>
+                            media
+                        </NavLink>
+                    </li>
+                    <li className="flex-shrink basis-full text-center capitalize">
+                        <NavLink to="/profile/likes" className={({ isActive, isPending }) =>
+                            isActive
+                                ? "border-b-blue-600 border-b-4"
+                                : isPending
+                                    ? "pending"
+                                    : ""
+                        }>
+                            likes
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
+            <div>
+                <Outlet />
+            </div>
         </section>
     )
 }

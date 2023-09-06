@@ -1,15 +1,15 @@
 import { ChangeEvent, useState } from "react";
 import { BlankProfile } from "../assets";
 
-export default function TweetForm({newTweetHandler}: {newTweetHandler: (data: tweet) => void}) {
+export default function TweetForm({ newTweetHandler }: { newTweetHandler: (data: tweet) => void }) {
 
   const [tweet, setTweet] = useState("")
 
-  function handleChange(e: ChangeEvent<HTMLTextAreaElement>){
+  function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
     setTweet(e.target.value)
   }
 
-  async function handledPost(){
+  async function handledPost() {
 
     const res = await fetch('http://localhost:8080/tweet', {
       method: 'POST',
@@ -28,7 +28,7 @@ export default function TweetForm({newTweetHandler}: {newTweetHandler: (data: tw
 
 
   return (
-    <div className="mx-auto max-w-[50%] min-h-[12rem] py-3 pt-6 px-5 border-x border-b border-gray-400 overflow-auto">
+    <div className="min-h-[12rem] py-3 pt-6 px-5 border-x border-b border-gray-400 overflow-auto">
       <div className="flex h-full">
         <img
           src={BlankProfile}
@@ -110,7 +110,7 @@ export default function TweetForm({newTweetHandler}: {newTweetHandler: (data: tw
               </div>
             </div>
 
-            <button 
+            <button
               className="bg-violet-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
               onClick={handledPost}>
               Post
