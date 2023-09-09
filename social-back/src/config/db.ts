@@ -6,7 +6,7 @@ const dbClient = new Client({
     user: process.env.DBUSER,
     password: process.env.DBPASS,
     host: process.env.DBHOST,
-    port: process.env.DBPORT,
+    port: parseInt(process.env.DBPORT || '5432'),
     database: process.env.DBNAME
 })
 

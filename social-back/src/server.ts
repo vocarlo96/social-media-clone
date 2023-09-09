@@ -1,5 +1,5 @@
 import express from 'express'
-// import path from 'path';
+import path from 'path';
 import 'dotenv/config'
 
 import {dbClient} from './config/db.js'
@@ -13,9 +13,9 @@ const PORT = process.env.PORT
 app.use(express.json());
 
 // STATIC FILES
-// app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
-app.use('/', (req, res, next) => {
+app.use('/', ( _, res, next) => {
 
     // const whitelist = ['', '', ''];
     // const origin: string = req.headers.origin!; // Non-null assertion operator
@@ -33,8 +33,7 @@ app.use('/', (req, res, next) => {
 app.use("/profile", profileRoutes)
 app.use("/tweet", tweetRoutes)
 
-app.use("*", (req, res) => {
-    // Request
+app.use("*", (_, res) => {
     res.status(404)
     res.send("<h1>no existe<h1>")
     res.end()

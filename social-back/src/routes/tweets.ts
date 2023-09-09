@@ -7,15 +7,15 @@ router.get('/', tweetController.getTweets)
 
 router.post('/', tweetController.createTweet)
 
-router.put('/', (req, res) => {
+router.put('/', () => {
     console.log('modificando info')
 })
 
-router.delete('/', (req, res) => {
+router.delete('/', () => {
     console.log('eliminando info')
 })
 
-router.patch('/', (req, res) => {
+router.patch('/', () => {
     console.log('modificando una parte info')
 })
 

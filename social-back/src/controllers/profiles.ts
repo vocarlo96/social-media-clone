@@ -1,6 +1,20 @@
 import { dbClient } from "../config/db.js";
+import {RequestHandler} from 'express'
 
-export async function getProfiles(req, res, next) {
+
+// export async function getProfiles<RequestHandler>(_, res, next) {
+//     try{
+//         const users = await dbClient.query('SELECT * FROM profiles')
+//         res.send(users.rows)
+//     } catch(e){ 
+//         next()
+//     }finally{
+//         res.end()
+//     }
+// }
+
+
+export const getProfiles: RequestHandler = async (_, res, next) => {
     try{
         const users = await dbClient.query('SELECT * FROM profiles')
         res.send(users.rows)
@@ -13,7 +27,7 @@ export async function getProfiles(req, res, next) {
 
 
 // JUST CREATE A USER WITH A LOGIN
-export async function createProfile(req, res, next) {
+export const createProfile: RequestHandler = async (req, res, next) => {
 
     const profileData = req.body
 
@@ -32,7 +46,7 @@ export async function createProfile(req, res, next) {
 }
 
 // JUST ADITIONAL INFO
-export async function updateProfile(req, res, next) {
+export const updateProfile:RequestHandler = async (req, res, next) => {
 
     const profileData = req.body
     console.log("aca")

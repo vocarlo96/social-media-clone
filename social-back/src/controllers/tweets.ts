@@ -1,6 +1,7 @@
 import { dbClient } from "../config/db.js"
+import { RequestHandler } from "express"
 
-const getTweets = async (req, res, next) => {
+export const getTweets: RequestHandler = async (_, res, next) => {
     try{
         const tweets = await dbClient.query('SELECT * FROM tweet')
         res.send(tweets.rows)
@@ -12,7 +13,7 @@ const getTweets = async (req, res, next) => {
     // await dbClient.end()
 }
 
-const createTweet = async (req, res, next) => {
+export const createTweet: RequestHandler = async (req, res) => {
     
     const data = req.body
     const query = {
@@ -30,5 +31,3 @@ const createTweet = async (req, res, next) => {
     }
     // await dbClient.end()
 }
-
-export {getTweets, createTweet}
