@@ -5,6 +5,7 @@ import 'dotenv/config'
 import {dbClient} from './config/db.js'
 
 import tweetRoutes from './routes/tweets.js'
+import retweetRoutes from './routes/retweet.js'
 import profileRoutes from './routes/profiles.js'
 
 const app = express()
@@ -32,6 +33,7 @@ app.use('/', ( _, res, next) => {
 
 app.use("/profile", profileRoutes)
 app.use("/tweet", tweetRoutes)
+app.use("/retweet", retweetRoutes)
 
 app.use("*", (_, res) => {
     res.status(404)
