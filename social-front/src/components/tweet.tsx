@@ -1,6 +1,38 @@
 import { BlankProfile, Profile2 } from '../assets';
 // import { Chat, Fav, Retweet, Stats } from '../assets/icons';
+
+async function setReetweet(tweetId: number, userId: string) {
+    console.log(tweetId)
+    const res = await fetch('http://localhost:8080/retweet', {
+        method: 'POST',
+        body: JSON.stringify({
+            userId,
+            tweetId
+        }),
+        headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+
+    const data = await res.json()
+
+    console.log(data)
+}
+
+async function deleteReetweet(retweetId: number) {
+    const res = await fetch(`http://localhost:8080/${retweetId}`, {
+        method: 'DELETE',
+    })
+
+    const data = await res.json()
+
+    console.log(data)
+}
+
+
 function Tweet({ tweet }: { tweet: tweet }) {
+
     return (
         <div className='text-gray-950 py-3 px-5 border-b border-gray-400 cursor-pointer'>
 
@@ -9,11 +41,11 @@ function Tweet({ tweet }: { tweet: tweet }) {
                 <div className=''>
                     <div className='flex max-h-5 mb-1 items-center'>
                         <svg xmlns="http://www.w3.org/2000/svg" className="fill-gray-500 h-5 mr-2" viewBox="0 -960 960 960"><path d="M280-80 120-240l160-160 42 44-86 86h464v-160h60v220H236l86 86-42 44Zm-80-450v-220h524l-86-86 42-44 160 160-160 160-42-44 86-86H260v160h-60Z" /></svg>
-                        <p className="text-gray-500 text-sm hover:underline">jzangarini reposted</p>
+                        <p className="text-gray-500 text-sm hover:underline">{`${tweet.name} ${tweet.lastname}`} reposted</p>
                     </div>
                     <div className="flex justify-start">
-                        <p className="mr-3 font-bold capitalize hover:underline ">pedrito er sanchez</p>
-                        <p className="">@pedri</p>
+                        <p className="mr-3 font-bold capitalize hover:underline ">{`${tweet.name} ${tweet.lastname}`}</p>
+                        <p className="">@{tweet.username}</p>
                     </div>
                     <div className="mb-4">
                         <p className="">{tweet.tweet}</p>
@@ -33,7 +65,7 @@ function Tweet({ tweet }: { tweet: tweet }) {
                             </svg>
                             <span className='self-center'>50</span>
                         </div>
-                        <div className="flex hover:text-green-600 hover:fill-green-600 transition">
+                        <div className="flex hover:text-green-600 hover:fill-green-600 transition " onClick={() => setReetweet(tweet.tweet_id, 'voca2')}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 mr-2" viewBox="0 -960 960 960"><path d="M280-80 120-240l160-160 42 44-86 86h464v-160h60v220H236l86 86-42 44Zm-80-450v-220h524l-86-86 42-44 160 160-160 160-42-44 86-86H260v160h-60Z" /></svg>
                             <span className='self-center '>12</span>
                         </div>

@@ -29,8 +29,10 @@ export const setRetweet:RequestHandler = async(req, res) => {
 
     try {
         const data = await dbClient.query(query)
+        console.log(data.rows)
         res.status(203).send(data.rows[0])
     }catch(e){
+        console.log(e)
         res.status(500).send()
     } finally{
         res.end()

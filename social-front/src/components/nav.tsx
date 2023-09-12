@@ -57,7 +57,7 @@ function NavButton({ linkType, to }: { linkType: LinkType, to: string }) {
 export default function Nav() {
 
     return (
-        <nav className='max-w-[25%] w-full'>
+        <nav className='max-w-[25%] w-full h-full'>
             <ul className='pt-14'>
                 <NavButton to='/' linkType='home' />
                 <NavButton to='/' linkType='explore' />

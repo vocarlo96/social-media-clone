@@ -1,12 +1,18 @@
 import { dbClient } from "../config/db.js"
 import { RequestHandler } from "express"
 
-export const getTweets: RequestHandler = async (_, res, next) => {
+export const getTweets: RequestHandler = async (_, res) => {
+    const query = {
+        text: 'SELECT p.username, p.url_img, p.name, p.lastname, t.tweet_id, t.tweet, attach_img FROM tweet t JOIN profile p ON p.username = t.user_id'
+    }
+
     try{
-        const tweets = await dbClient.query('SELECT * FROM tweet')
+        const tweets = await dbClient.query(query)
+        console.log(tweets.rows)
         res.send(tweets.rows)
     } catch(e){
-        next()
+        console.log(e)
+        res.status(500).send()
     } finally {
         res.end()
     }
