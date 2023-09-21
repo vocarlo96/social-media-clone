@@ -1,4 +1,4 @@
-type tweet = {
+type TweetType = {
     tweet_id: number,
     tweet: string
     attachImg: string

@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { BlankProfile } from "../assets";
 
-export default function TweetForm({ newTweetHandler }: { newTweetHandler: (data: tweet) => void }) {
+export default function TweetForm({ newTweetHandler }: { newTweetHandler: (data: TweetType) => void }) {
 
   const [tweet, setTweet] = useState("")
 
@@ -9,22 +9,7 @@ export default function TweetForm({ newTweetHandler }: { newTweetHandler: (data:
     setTweet(e.target.value)
   }
 
-  async function handledPost() {
-
-    const res = await fetch('http://localhost:8080/tweet', {
-      method: 'POST',
-      body: JSON.stringify({
-        tweet,
-        username: 'voca',
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    })
-    const data = await res.json()
-    newTweetHandler(data)
-  }
+  // create new tweet
 
 
   return (

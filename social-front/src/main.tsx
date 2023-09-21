@@ -6,6 +6,7 @@ import './index.css'
 
 import Profile from './components/profile.tsx'
 import Feed from './components/feed.tsx'
+import TweetProvider from './context/tweetsContext.tsx'
 
 const router = createBrowserRouter([{
   path: '/',
@@ -37,6 +38,8 @@ const router = createBrowserRouter([{
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <TweetProvider>
+      <RouterProvider router={router} />
+    </TweetProvider>
   </React.StrictMode>,
 )
