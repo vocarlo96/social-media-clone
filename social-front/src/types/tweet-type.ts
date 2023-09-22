@@ -6,3 +6,9 @@ type TweetType = {
     lastname?: string,
     username?: string
 }
+
+type NewTweetType = {
+    username: string
+    tweet: string
+    attachImg?: string
+}

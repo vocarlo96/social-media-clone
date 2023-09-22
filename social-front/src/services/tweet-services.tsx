@@ -1,4 +1,4 @@
-export async function createTweet(TweetData: TweetType) {
+export async function createTweet(TweetData: NewTweetType): Promise<TweetType> {
 
     const res = await fetch('http://localhost:8080/tweet', {
         method: 'POST',
@@ -9,48 +9,26 @@ export async function createTweet(TweetData: TweetType) {
         },
     })
     return await res.json()
-    // newTweetHandler(data)
 }
 
-export function getTweets(signal: AbortController["signal"]) {
-    return async function () {
-        const res = await fetch('http://localhost:8080/tweet', {
-            method: 'GET',
-            signal
-        })
 
-        return await res.json()
-    }
+
+export async function getTweets() {
+    const res = await fetch('http://localhost:8080/tweet', {
+        method: 'GET',
+    })
+
+    return await res.json()
 }
 
-// export async function getTweets() {
-//     const res = await fetch('http://localhost:8080/tweet', {
-//         method: 'GET'
-//     })
 
-//     return await res.json()
-// }
-
-// const [tweetList, setTweetList] = useState<TweetType[]>([])
-
-// useEffect(() => {
-//     const controller = new AbortController()
-
-//     const fetchData = async () => {
+// export function getTweets(signal: AbortController["signal"]) {
+//     return async function () {
 //         const res = await fetch('http://localhost:8080/tweet', {
-//             method: 'get',
-//             signal: controller.signal
+//             method: 'GET',
+//             signal
 //         })
-//         const data = await res.json()
-//         setTweetList(data)
+
+//         return await res.json()
 //     }
-
-//     fetchData()
-
-//     return () => controller.abort()
-// }, [])
-
-// action
-// function tweetInsertionHandler(data: tweet) {
-//     setTweetList((prev) => [data, ...prev])
 // }

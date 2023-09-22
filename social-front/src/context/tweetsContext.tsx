@@ -7,6 +7,7 @@ type TweetContextProps = {
 export type contextProps = {
     tweetList: TweetType[]
     setTweetList: React.Dispatch<React.SetStateAction<TweetType[]>>
+    addTweet: (newTweet: TweetType) => void
 }
 
 const TweetContext = createContext<contextProps | null>(null)
@@ -25,11 +26,15 @@ const TweetProvider = ({ children }: TweetContextProps) => {
 
     // actions
     // add tweet
+    function addTweet(newTweet: TweetType) {
+        setTweetList(prev => [newTweet, ...prev])
+    }
     // delete tweet
     // retweets
     // delete retweet
     return (
         <TweetContext.Provider value={{
+            addTweet,
             setTweetList,
             tweetList
         }}>

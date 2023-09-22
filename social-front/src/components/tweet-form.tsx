@@ -1,16 +1,19 @@
 import { ChangeEvent, useState } from "react";
 import { BlankProfile } from "../assets";
+import useTweet from "../hooks/useTweet";
 
-export default function TweetForm({ newTweetHandler }: { newTweetHandler: (data: TweetType) => void }) {
+export default function TweetForm() {
 
   const [tweet, setTweet] = useState("")
+  const { addNewTweet } = useTweet()
 
   function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
     setTweet(e.target.value)
   }
 
-  // create new tweet
-
+  function handleSubmit() {
+    addNewTweet({ tweet, username: 'voca', })
+  }
 
   return (
     <div className="min-h-[12rem] py-3 pt-6 px-5 border-x border-b border-gray-400 overflow-auto">
@@ -97,7 +100,7 @@ export default function TweetForm({ newTweetHandler }: { newTweetHandler: (data:
 
             <button
               className="bg-violet-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
-              onClick={handledPost}>
+              onClick={handleSubmit}>
               Post
             </button>
           </div>

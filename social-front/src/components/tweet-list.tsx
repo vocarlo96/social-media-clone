@@ -1,7 +1,8 @@
+import useTweet from "../hooks/useTweet"
 import Tweet from "./tweet"
 
-function TweetList({ tweetList }: { tweetList: TweetType[] }) {
-    console.log(tweetList)
+function TweetList() {
+    const { tweetList } = useTweet()
     return (
         <div className="border-x border-gray-400">
             {tweetList.map((elem: TweetType, index) => {
