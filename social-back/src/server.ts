@@ -1,4 +1,5 @@
 import express from 'express'
+import passport from 'passport'
 import path from 'path';
 import 'dotenv/config'
 
@@ -7,6 +8,8 @@ import {dbClient} from './config/db.js'
 import tweetRoutes from './routes/tweets.js'
 import retweetRoutes from './routes/retweet.js'
 import profileRoutes from './routes/profiles.js'
+import authRoutes from './routes/auth.js'
+import { LocalStrategy } from './controllers/auth-controller';
 
 const app = express()
 const PORT = process.env.PORT
@@ -31,6 +34,9 @@ app.use('/', ( _, res, next) => {
     next()
 })
 
+passport.use(LocalStrategy)
+
+app.use("/auth", authRoutes)
 app.use("/profile", profileRoutes)
 app.use("/tweet", tweetRoutes)
 app.use("/retweet", retweetRoutes)

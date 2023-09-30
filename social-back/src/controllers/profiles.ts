@@ -25,24 +25,27 @@ export const getProfiles: RequestHandler = async (_, res, next) => {
     }
 }
 
+export const create = async (profileData: any) => {
+    const query = {
+        text: "INSERT INTO profile(username, email, password, password_salt) VALUES($1, $2, $3, $4) RETURNING *",
+        values: [profileData.username, profileData.email, profileData.hashedPassword, profileData.salt]
+    }
+    return await dbClient.query(query)
+}
 
 // JUST CREATE A USER WITH A LOGIN
-export const createProfile: RequestHandler = async (req, res, next) => {
+export const createProfile: RequestHandler = async (_, res) => {
+    res.redirect(307, '/auth/sign-up');
+    // const profileData = req.body
 
-    const profileData = req.body
-
-    try{
-        const query = {
-            text: "INSERT INTO profile(username, email, password) VALUES($1, $2, $3)",
-            values: [profileData.username, profileData.email, profileData.password]
-        }
-        const users = await dbClient.query(query)
-        res.send(users.rows)
-    } catch(e){ 
-        next()
-    }finally{
-        res.end()
-    }
+    // try{
+    //     const users = await create(profileData)
+    //     res.send(users.rows)
+    // } catch(e){ 
+    //     next()
+    // }finally{
+    //     res.end()
+    // }
 }
 
 // JUST ADITIONAL INFO
