@@ -8,10 +8,9 @@ export const getTweets: RequestHandler = async (_, res) => {
 
     try{
         const tweets = await dbClient.query(query)
-        console.log(tweets.rows.length)
         res.send(tweets.rows)
-    } catch(e){
-        console.log(e)
+    } catch(err){
+        console.log(err)
         res.status(500).send()
     } finally {
         res.end()

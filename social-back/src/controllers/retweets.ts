@@ -19,9 +19,6 @@ export const getAllRetweets:RequestHandler = async (_, res) =>{
 
 export const setRetweet:RequestHandler = async(req, res) => {
     const data = req.body
-
-    console.log(data)
-
     const query = {
         text: 'INSERT INTO retweet(profile_id, tweet_id) VALUES($1, $2) RETURNING retweet_id',
         values: [data.userId, parseInt(data.tweetId, 10)]
@@ -29,10 +26,9 @@ export const setRetweet:RequestHandler = async(req, res) => {
 
     try {
         const data = await dbClient.query(query)
-        console.log(data.rows)
         res.status(203).send(data.rows[0])
-    }catch(e){
-        console.log(e)
+    }catch(err){
+        console.log(err)
         res.status(500).send()
     } finally{
         res.end()
